@@ -1,0 +1,98 @@
+//package com.cocopass;
+//
+//import com.cocopass.iot.model.*;
+//import com.cocopass.helper.*;
+//import java.util.Date;
+// 
+//
+//import com.cocopass.Common;
+//
+//public class Packet_V1_X  extends  Packet {
+// 
+//	byte[] packet=null;
+//	String terminalID="";
+//	float version=1.0f;
+//	int length=0;  //47 或者 54
+//	boolean isRealTime=true;
+//	String samplingTime="";
+//	String writtenIntoSystemTime="";
+//	int signaling;
+//	public Packet_V1_X(byte[] packet)
+//	{
+//		this.packet= packet;
+//		byte[] byteArrayTerminalID=new byte[]{packet[8],packet[7],packet[6],packet[5]};
+//		this.terminalID= Common.GetTerminalID(byteArrayTerminalID);
+//		this.length=packet.length;
+//		this.signaling=packet[2];
+//		
+//		if((signaling==0x60||signaling==0x61)&&this.length==54)
+//		{
+//			this.version=1.1f;
+//		}
+//		else if((signaling==0x62||signaling==0x67)&&this.length==60)
+//		{
+//			this.version=1.1f;
+//		}
+//		/*
+//		else if((signaling==0x64||signaling==0x65)&&this.length==60)
+//		{
+//			this.version=1.1f;
+//		}
+//		*/
+//		
+//		if(this.signaling==0x61||this.signaling==0x65)
+//		{
+//			isRealTime=false;
+//		}
+//		this.samplingTime="20"+CByte.ByteToHexString(packet[15])+"-"+CByte.ByteToHexString(packet[16])+"-"+CByte.ByteToHexString(packet[17])+" "+CByte.ByteToHexString(packet[18])+":"+CByte.ByteToHexString(packet[19])+":"+CByte.ByteToHexString(packet[20]);
+//		this.writtenIntoSystemTime=CDate.ToString("yyyy-MM-dd HH:mm:ss", new Date());
+//		
+//		 
+//	}
+//	
+
+//	/*
+//	 * 
+//	 * 简化开发，电池数据不再取位置数据，因为版本判断较为麻烦，默认版本1.0f.直接解析电池数据
+//	 */
+//	public Object ToBatteryInfoModel() {
+//		// TODO Auto-generated method stub
+
+//
+//		}
+//		
+//		return batteryInfo;
+//	}
+//
+
+//
+//	public Object ToAlarmModel() {
+//		// TODO Auto-generated method stub
+
+//		return alarm;
+//	}
+//
+// 
+//	public Object ToEBikeRunInfoModel() {
+//		// TODO Auto-generated method stub
+//		
+//		com.cocopass.iot.model.EBikeRunInfo ebikeRunInfo=new com.cocopass.iot.model.EBikeRunInfo();
+//		
+//		com.cocopass.iot.model.Alarm alarm=(com.cocopass.iot.model.Alarm)ToAlarmModel();
+//		ebikeRunInfo.SetAlarm(alarm);
+//		
+//		com.cocopass.iot.model.GPSInfo gpsInfo=(com.cocopass.iot.model.GPSInfo)ToGPSInfoModel();
+//		if(alarm!=null)
+//		{
+//			gpsInfo.SetAlarmNO(alarm.GetAlarmNO());
+//			gpsInfo.SetAlarmParam(alarm.GetAlarmParam());
+//		}
+//		ebikeRunInfo.SetGPSInfo(gpsInfo);
+//		
+//		com.cocopass.iot.model.ControllerInfo controllerInfo=(com.cocopass.iot.model.ControllerInfo)ToControllerInfoModel();
+//		ebikeRunInfo.SetControllerInfo(controllerInfo);
+//		
+//		return ebikeRunInfo;
+//	}
+//
+//}
